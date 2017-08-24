@@ -1,7 +1,8 @@
-package uk.gov.dwp.queue.triage.core.classification.server;
+package uk.gov.dwp.queue.triage.core.classification.server.executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import uk.gov.dwp.queue.triage.core.classification.server.MessageClassificationService;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -70,6 +71,10 @@ public class MessageClassificationExecutorService {
         LOGGER.info("Pausing execution of the MessageClassificationService");
         cancelFutureTask();
         LOGGER.info("Execution of the MessageClassificationService paused");
+    }
+
+    ScheduledFuture<?> getScheduledFuture() {
+        return futureTask;
     }
 
     private void cancelFutureTask() {
