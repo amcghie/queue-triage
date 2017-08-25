@@ -24,3 +24,10 @@ script:
 services:
   - mongodb
 
+# Attempt to upload the test file output to S3
+addons:
+  artifacts:
+    debug: true
+    region: eu-west-1
+    files:
+      - $(find buck-out/gen -name "uk.gov.dwp.*Test.xml" | tr "\n" ":")
