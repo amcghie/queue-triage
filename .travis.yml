@@ -30,4 +30,4 @@ addons:
     debug: true
     region: eu-west-1
     files:
-      - $(find buck-out/gen -name "uk.gov.dwp.*Test.xml" | tr "\n" ":")
+      - $(find buck-out/gen -type d -name "__java_test*_output*" | tr "\n" ":")
