@@ -29,7 +29,9 @@ addons:
   artifacts:
     debug: true
     region: eu-west-1
+    paths:
+      - buck-out/gen
     files:
-      - $(ls buck-out/gen/core/component-test/__java_test_test_output__ |  tr "\n" ":")
-      - $(ls buck-out/gen/core/message-classification/__java_test_test-server_output__/ |  tr "\n" ":")
+      - $(ls core/component-test/__java_test_test_output__ |  tr "\n" ":")
+      - $(ls core/message-classification/__java_test_test-server_output__/ |  tr "\n" ":")
 #      - $(find buck-out/gen -type d -name "__java_test*_output*" | tr "\n" ":")
