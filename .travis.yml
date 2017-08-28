@@ -33,3 +33,4 @@ addons:
 #      - $(find buck-out/gen -path '*/__java_test*_output*/*.xml' | tr '\n' ':')
       - ./buck-out/gen/core/message-classification/__java_test_test-server_output__
       - ./buck-out/gen/core/component-test/__java_test_test_output__
+    working_dir: $TRAVIS_BUILD_NUMBER

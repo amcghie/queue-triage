@@ -37,6 +37,7 @@ public class MessageClassificationExecutorServiceTest {
 
     @After
     public void tearDown() throws Exception {
+        LOGGER.debug("Shutting down the scheduledExecutorService");
         scheduledExecutorService.shutdownNow();
     }
 
@@ -140,5 +141,6 @@ public class MessageClassificationExecutorServiceTest {
     private void verifyMessageClassificationServiceExecutions(int times, int timeoutInMillis) {
         LOGGER.debug("Verifying messageClassificationService has been called {} times", times);
         verify(messageClassificationService, timeout(timeoutInMillis).times(times)).classifyFailedMessages();
+        LOGGER.debug("Verified messageClassificationService has been called {} times", times);
     }
 }
