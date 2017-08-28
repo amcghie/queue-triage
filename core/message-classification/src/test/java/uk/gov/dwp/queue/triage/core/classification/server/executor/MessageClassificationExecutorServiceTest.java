@@ -4,6 +4,8 @@ import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.junit.After;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.gov.dwp.queue.triage.core.classification.server.MessageClassificationService;
 
 import java.util.concurrent.Executors;
@@ -19,6 +21,8 @@ import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
 
 public class MessageClassificationExecutorServiceTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageClassificationExecutorServiceTest.class);
 
     private final MessageClassificationService messageClassificationService = mock(MessageClassificationService.class);
     private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
@@ -39,9 +43,11 @@ public class MessageClassificationExecutorServiceTest {
     @Test
     public void jobExecutesSuccessfully() throws Exception {
         underTest.start();
+        LoggerFactory.getLogger(MessageClassificationExecutorServiceTest.class).debug("Verifying Message Classification Service");
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-        verify(messageClassificationService, timeout(75).times(1)).classifyFailedMessages();
+        verifyMessageClassificationServiceExecutions(1, 75);
     }
+
 
     @Test
     public void jobContinuesToExecuteIfExceptionIsThrown() {
@@ -49,11 +55,11 @@ public class MessageClassificationExecutorServiceTest {
 
         underTest.start();
 
-        verify(messageClassificationService, timeout(75).times(1)).classifyFailedMessages();
+        verifyMessageClassificationServiceExecutions(1, 75);
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
 
-        verify(messageClassificationService, timeout(100).times(2)).classifyFailedMessages();
+        verifyMessageClassificationServiceExecutions(2, 120);
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
     }
@@ -71,13 +77,13 @@ public class MessageClassificationExecutorServiceTest {
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
 
-        verify(messageClassificationService, timeout(75).times(0)).classifyFailedMessages();
+        verifyMessageClassificationServiceExecutions(0, 75);
 
         underTest.execute();
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
 
-        verify(messageClassificationService, timeout(75).times(1)).classifyFailedMessages();
+        verifyMessageClassificationServiceExecutions(1, 75);
     }
 
     @Test
@@ -85,14 +91,14 @@ public class MessageClassificationExecutorServiceTest {
         underTest.start();
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-        verify(messageClassificationService, timeout(75).times(1)).classifyFailedMessages();
+        verifyMessageClassificationServiceExecutions(1, 75);
 
         underTest.pause();
         assertThat(underTest.getScheduledFuture(), allOf(done(true), cancelled(true)));
 
         underTest.start();
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-        verify(messageClassificationService, timeout(75).times(2)).classifyFailedMessages();
+        verifyMessageClassificationServiceExecutions(2, 75);
     }
 
     private TypeSafeDiagnosingMatcher<ScheduledFuture<?>> done(boolean done) {
@@ -129,5 +135,10 @@ public class MessageClassificationExecutorServiceTest {
                 description.appendText("is cancelled");
             }
         };
+    }
+
+    private void verifyMessageClassificationServiceExecutions(int times, int timeoutInMillis) {
+        LOGGER.debug("Verifying messageClassificationService has been called {} times", times);
+        verify(messageClassificationService, timeout(timeoutInMillis).times(times)).classifyFailedMessages();
     }
 }

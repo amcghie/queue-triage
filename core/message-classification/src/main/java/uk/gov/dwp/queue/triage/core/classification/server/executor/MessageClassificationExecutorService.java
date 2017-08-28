@@ -32,6 +32,7 @@ public class MessageClassificationExecutorService {
         this.scheduledExecutorService = scheduledExecutorService;
         this.runnable = () -> {
             try {
+                LOGGER.debug("Executing the Classify Failed Messages Job");
                 messageClassificationService.classifyFailedMessages();
             } catch (Throwable t) {
                 LOGGER.error("An error occurred classifying FailedMessages", t);
