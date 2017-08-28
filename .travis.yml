@@ -30,4 +30,4 @@ addons:
     debug: true
     region: eu-west-1
     paths:
-      - $(find buck-out/gen -type d -name "__java_test*_output*" -printf "%p/*.xml:")
+      - $(find buck-out/gen -path "*/__java_test*_output*/*.xml")
