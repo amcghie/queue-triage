@@ -3,11 +3,14 @@ package uk.gov.dwp.queue.triage.core.classification.server.executor;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeDiagnosingMatcher;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.stubbing.Answer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import uk.gov.dwp.queue.triage.core.classification.server.MessageClassificationService;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -15,10 +18,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
-import static org.mockito.Mockito.doThrow;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.timeout;
-import static org.mockito.Mockito.verify;
 
 public class MessageClassificationExecutorServiceTest {
 
@@ -27,6 +29,8 @@ public class MessageClassificationExecutorServiceTest {
     private final MessageClassificationService messageClassificationService = mock(MessageClassificationService.class);
     private final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 
+    private CountDownLatch countDownLatch = new CountDownLatch(1);
+
     private MessageClassificationExecutorService underTest = new MessageClassificationExecutorService(
             scheduledExecutorService,
             messageClassificationService,
@@ -34,6 +38,13 @@ public class MessageClassificationExecutorServiceTest {
             100,
             TimeUnit.MILLISECONDS
     );
+
+    @Before
+    public void setUp() {
+        doAnswer(decrementCountdownLatch())
+                .when(messageClassificationService)
+                .classifyFailedMessages();
+    }
 
     @After
     public void tearDown() throws Exception {
@@ -44,29 +55,30 @@ public class MessageClassificationExecutorServiceTest {
     @Test
     public void jobExecutesSuccessfully() throws Exception {
         underTest.start();
-        LoggerFactory.getLogger(MessageClassificationExecutorServiceTest.class).debug("Verifying Message Classification Service");
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-        verifyMessageClassificationServiceExecutions(1, 75);
+        verifyMessageClassificationServiceExecutions(75);
     }
 
 
     @Test
-    public void jobContinuesToExecuteIfExceptionIsThrown() {
-        doThrow(new RuntimeException()).when(messageClassificationService).classifyFailedMessages();
+    public void jobContinuesToExecuteIfExceptionIsThrown() throws InterruptedException {
+        doAnswer(decrementCountdownLatchAndThrowException())
+                .when(messageClassificationService)
+                .classifyFailedMessages();
 
         underTest.start();
 
-        verifyMessageClassificationServiceExecutions(1, 75);
+        verifyMessageClassificationServiceExecutions(75);
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
 
-        verifyMessageClassificationServiceExecutions(2, 120);
+        verifyMessageClassificationServiceExecutions(120);
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
     }
 
     @Test
-    public void jobCanBeExecutedOnDemand() {
+    public void jobCanBeExecutedOnDemand() throws InterruptedException {
         MessageClassificationExecutorService underTest = new MessageClassificationExecutorService(
                 scheduledExecutorService,
                 messageClassificationService,
@@ -77,29 +89,42 @@ public class MessageClassificationExecutorServiceTest {
         underTest.start();
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-
-        verifyMessageClassificationServiceExecutions(0, 75);
+        assertThat(countDownLatch.getCount(), is(1L));
 
         underTest.execute();
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-
-        verifyMessageClassificationServiceExecutions(1, 75);
+        verifyMessageClassificationServiceExecutions(75);
     }
 
     @Test
-    public void executorCanBePausedAndResumed() {
+    public void executorCanBePausedAndResumed() throws InterruptedException {
+
         underTest.start();
 
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-        verifyMessageClassificationServiceExecutions(1, 75);
+        verifyMessageClassificationServiceExecutions(75);
 
         underTest.pause();
         assertThat(underTest.getScheduledFuture(), allOf(done(true), cancelled(true)));
 
         underTest.start();
         assertThat(underTest.getScheduledFuture(), allOf(done(false), cancelled(false)));
-        verifyMessageClassificationServiceExecutions(2, 75);
+        verifyMessageClassificationServiceExecutions(75);
+    }
+
+    private Answer decrementCountdownLatch() {
+        return invocationOnMock -> {
+            countDownLatch.countDown();
+            return null;
+        };
+    }
+
+    private Answer decrementCountdownLatchAndThrowException() {
+        return invocationOnMock -> {
+            countDownLatch.countDown();
+            throw new RuntimeException("Head Shot!");
+        };
     }
 
     private TypeSafeDiagnosingMatcher<ScheduledFuture<?>> done(boolean done) {
@@ -138,9 +163,10 @@ public class MessageClassificationExecutorServiceTest {
         };
     }
 
-    private void verifyMessageClassificationServiceExecutions(int times, int timeoutInMillis) {
-        LOGGER.debug("Verifying messageClassificationService has been called {} times", times);
-        verify(messageClassificationService, timeout(timeoutInMillis).times(times)).classifyFailedMessages();
-        LOGGER.debug("Verified messageClassificationService has been called {} times", times);
+    private void verifyMessageClassificationServiceExecutions(int timeoutInMillis) throws InterruptedException {
+        LOGGER.debug("Verifying messageClassificationService has been called within {}ms", timeoutInMillis);
+        assertThat(countDownLatch.await(timeoutInMillis, TimeUnit.MILLISECONDS), is(true));
+        LOGGER.debug("Verified messageClassificationService has been called");
+        countDownLatch = new CountDownLatch(1);
     }
 }
