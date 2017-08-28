@@ -30,4 +30,6 @@ addons:
     debug: true
     region: eu-west-1
     paths:
-      - $(find buck-out/gen -path '*/__java_test*_output*/*.xml' | tr '\n' ':')
+#      - $(find buck-out/gen -path '*/__java_test*_output*/*.xml' | tr '\n' ':')
+      - buck-out/gen/core/message-classification/__java_test_test-server_output__/*.xml
+      - buck-out/gen/core/component-test/__java_test_test_output__/*.xml
