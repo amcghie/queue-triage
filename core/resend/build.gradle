@@ -14,7 +14,7 @@ dependencies {
     compile project(':common/cxf'),
             project(':core/activemq')
 
-    testCompile "org.yaml:snakeyaml:1.17"
+    testCompile "org.yaml:snakeyaml:$snakeYamlVersion"
 
 
 }

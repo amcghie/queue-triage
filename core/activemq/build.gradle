@@ -13,7 +13,7 @@ dependencies {
     testCompile project(':core/domain-test-support'),
                 "org.springframework:spring-test:$springVersion",
                 "org.springframework:spring-tx:$springVersion",
-                "org.yaml:snakeyaml:1.17"
+                "org.yaml:snakeyaml:$snakeYamlVersion"
 
 
 }

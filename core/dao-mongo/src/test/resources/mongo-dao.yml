@@ -1,0 +1,11 @@
+dao:
+  mongo:
+    host: example.com
+    port: 37017
+    options:
+      ssl:
+        enabled: true
+        invalidHostnameAllowed: true
+    dbName: queue-triage
+    failedMessage:
+      name: failedMessage

@@ -11,5 +11,6 @@ dependencies {
 
     testCompile project(':core/dao-mongo-test-support'),
                 project(':core/domain-test-support'),
-                "org.hibernate:hibernate-validator:5.4.1.Final"
+                "org.hibernate:hibernate-validator:5.4.1.Final",
+                "org.yaml:snakeyaml:$snakeYamlVersion"
 }

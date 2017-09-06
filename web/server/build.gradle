@@ -21,7 +21,7 @@ dependencies {
             "org.springframework.boot:spring-boot:$springBootVersion",
             "org.springframework.boot:spring-boot-autoconfigure:$springBootVersion",
             "org.springframework.security:spring-security-ldap:$springSecurityVersion",
-            "org.yaml:snakeyaml:1.17"
+            "org.yaml:snakeyaml:$snakeYamlVersion"
 
     testCompile project(':core/client-test-support'),
                 "org.valid4j:json-path-matchers:1.1"
