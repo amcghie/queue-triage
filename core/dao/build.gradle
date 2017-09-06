@@ -1,0 +1,11 @@
+dependencies {
+    compile project(':common/id'),
+            project(':core/domain')
+    compile "org.slf4j:slf4j-api:$slf4jVersion",
+            "com.fasterxml.jackson.core:jackson-core:$jacksonVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+
+    testCompile project(':common/jackson')
+    testCompile 'org.valid4j:json-path-matchers:1.1'
+
+}

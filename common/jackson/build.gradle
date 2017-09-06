@@ -1,0 +1,10 @@
+dependencies {
+    compile project(':common/cxf'),
+            project(':common/id')
+
+    compile "javax.ws.rs:javax.ws.rs-api:$javaxWsRsApiVersion",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion",
+            "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$jacksonVersion",
+            "org.springframework:spring-context:$springVersion"
+}

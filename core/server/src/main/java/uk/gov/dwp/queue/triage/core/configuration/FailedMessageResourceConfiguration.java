@@ -3,8 +3,6 @@ package uk.gov.dwp.queue.triage.core.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import uk.gov.dwp.migration.mongo.demo.cxf.client.CxfConfiguration;
-import uk.gov.dwp.migration.mongo.demo.cxf.client.ResourceRegistry;
 import uk.gov.dwp.queue.triage.core.dao.FailedMessageDao;
 import uk.gov.dwp.queue.triage.core.dao.mongo.configuration.MongoDaoConfig;
 import uk.gov.dwp.queue.triage.core.domain.FailedMessageStatusAdapter;
@@ -16,6 +14,8 @@ import uk.gov.dwp.queue.triage.core.resource.search.FailedMessageSearchResource;
 import uk.gov.dwp.queue.triage.core.search.FailedMessageSearchService;
 import uk.gov.dwp.queue.triage.core.search.SearchFailedMessageResponseAdapter;
 import uk.gov.dwp.queue.triage.core.service.FailedMessageService;
+import uk.gov.dwp.queue.triage.cxf.client.CxfConfiguration;
+import uk.gov.dwp.queue.triage.cxf.client.ResourceRegistry;
 
 @Configuration
 @Import({

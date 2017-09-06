@@ -4,13 +4,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import uk.gov.dwp.migration.mongo.demo.cxf.client.CxfConfiguration;
-import uk.gov.dwp.migration.mongo.demo.cxf.client.ResourceRegistry;
 import uk.gov.dwp.queue.triage.core.dao.FailedMessageDao;
 import uk.gov.dwp.queue.triage.core.dao.mongo.configuration.MongoDaoConfig;
 import uk.gov.dwp.queue.triage.core.remove.RemoveFailedMessageService;
 import uk.gov.dwp.queue.triage.core.resource.delete.DeleteFailedMessageResource;
 import uk.gov.dwp.queue.triage.core.service.FailedMessageService;
+import uk.gov.dwp.queue.triage.cxf.client.CxfConfiguration;
+import uk.gov.dwp.queue.triage.cxf.client.ResourceRegistry;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

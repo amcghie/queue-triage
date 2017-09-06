@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':common/id'),
+            project(':core/dao'),
+            project(':core/domain')
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+
+    testCompile project(':core/domain-test-support')
+}

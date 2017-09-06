@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':common/id'),
+            project(':core/client')
+
+    compile "org.hamcrest:hamcrest-core:$hamcrestVersion",
+            "org.hamcrest:hamcrest-library:$hamcrestVersion"
+}

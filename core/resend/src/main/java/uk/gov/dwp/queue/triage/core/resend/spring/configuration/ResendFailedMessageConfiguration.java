@@ -4,8 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
-import uk.gov.dwp.migration.mongo.demo.cxf.client.CxfConfiguration;
-import uk.gov.dwp.migration.mongo.demo.cxf.client.ResourceRegistry;
 import uk.gov.dwp.queue.triage.core.jms.activemq.spring.ActiveMQConnectionFactoryBeanDefinitionFactory;
 import uk.gov.dwp.queue.triage.core.jms.spring.JmsTemplateBeanDefinitionFactory;
 import uk.gov.dwp.queue.triage.core.jms.spring.SpringMessageSenderBeanDefinitionFactory;
@@ -14,6 +12,8 @@ import uk.gov.dwp.queue.triage.core.resend.spring.FailedMessageSenderBeanDefinit
 import uk.gov.dwp.queue.triage.core.resend.spring.ResendBeanDefinitionFactory;
 import uk.gov.dwp.queue.triage.core.resend.spring.ResendFailedMessageServiceBeanDefinitionFactory;
 import uk.gov.dwp.queue.triage.core.resend.spring.ResendScheduledExecutorServiceBeanDefinitionFactory;
+import uk.gov.dwp.queue.triage.cxf.client.CxfConfiguration;
+import uk.gov.dwp.queue.triage.cxf.client.ResourceRegistry;
 
 @Configuration
 @Import({

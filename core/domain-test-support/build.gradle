@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':common/id'),
+            project(':core/domain')
+
+    compile "org.hamcrest:hamcrest-core:$hamcrestVersion",
+            "org.hamcrest:hamcrest-library:$hamcrestVersion",
+            "com.spotify:hamcrest-optional:1.0.2"
+}

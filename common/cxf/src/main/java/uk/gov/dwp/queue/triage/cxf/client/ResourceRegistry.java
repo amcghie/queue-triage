@@ -1,4 +1,4 @@
-package uk.gov.dwp.migration.mongo.demo.cxf.client;
+package uk.gov.dwp.queue.triage.cxf.client;
 
 import java.util.ArrayList;
 import java.util.List;

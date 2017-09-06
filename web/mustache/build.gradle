@@ -1,0 +1,7 @@
+dependencies {
+    compile project(':common/cxf'),
+            "com.github.spullara.mustache.java:compiler:0.9.5",
+            "javax.ws.rs:javax.ws.rs-api:$javaxWsRsApiVersion",
+            "org.slf4j:slf4j-api:$slf4jVersion",
+            "org.springframework:spring-context:$springVersion"
+}

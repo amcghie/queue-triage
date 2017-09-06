@@ -1,0 +1,18 @@
+dependencies {
+    compile project(':common/id'),
+            project(':core/domain'),
+            project(':core/service'),
+            "org.apache.commons:commons-lang3:3.5",
+            "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion",
+            "javax.ws.rs:javax.ws.rs-api:$javaxWsRsApiVersion"
+
+    // message-classification-server
+    compile project(':common/cxf'),
+            project(':core/search'),
+            "org.springframework:spring-beans:$springVersion",
+            "org.springframework:spring-context:$springVersion"
+
+    testCompile project(':common/jackson'),
+                project(':common/matchers')
+
+}

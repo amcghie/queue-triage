@@ -1,0 +1,4 @@
+dependencies {
+    compile "com.unboundid:unboundid-ldapsdk:4.0.0",
+            "org.slf4j:slf4j-api:$slf4jVersion"
+}

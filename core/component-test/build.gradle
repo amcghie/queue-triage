@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':common/jgiven'),
+            project(':core/client-test-support'),
+            project(':core/dao-mongo-test-support'),
+            project(':core/server'),
+            "com.tngtech.jgiven:jgiven-spring:$jgivenVersion",
+            "org.awaitility:awaitility:3.0.0",
+            "org.springframework:spring-beans:$springVersion",
+            "org.springframework:spring-web:$springVersion"
+
+    testCompile "org.springframework:spring-test:$springVersion",
+                "org.springframework.boot:spring-boot:$springBootVersion",
+                "org.springframework.boot:spring-boot-test:$springBootVersion"
+
+}

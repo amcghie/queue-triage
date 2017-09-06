@@ -1,0 +1,34 @@
+dependencies {
+    compile project(':common/cxf'),
+            project(':common/health'),
+            project(':common/id'),
+            project(':common/jackson'),
+            project(':common/swagger'),
+            project(':core/activemq'),
+            project(':core/client'),
+            project(':core/dao'),
+            project(':core/dao-mongo'),
+            project(':core/domain'),
+            project(':core/jms'),
+            project(':core/message-classification'),
+            project(':core/resend'),
+            project(':core/search'),
+            project(':core/service'),
+            "ch.qos.logback:logback-classic:$logbackVersion",
+            "ch.qos.logback:logback-core:$logbackVersion",
+            "org.apache.cxf:cxf-rt-transports-http-jetty:$apacheCxfVersion",
+            "org.hibernate:hibernate-validator:$hibernateValidatorVersion",
+            "org.eclipse.jetty:jetty-server:$jettyVersion",
+            "org.eclipse.jetty.websocket:javax-websocket-server-impl:$jettyVersion",
+            "org.slf4j:jcl-over-slf4j:$slf4jVersion",
+            "org.slf4j:jul-to-slf4j:$slf4jVersion",
+            "org.slf4j:log4j-over-slf4j:$slf4jVersion",
+            "org.slf4j:slf4j-api:$slf4jVersion",
+            "org.springframework:spring-web:$springVersion",
+            "org.springframework.boot:spring-boot:$springBootVersion",
+            "org.springframework.boot:spring-boot-autoconfigure:$springBootVersion"
+
+
+    testCompile project(':core/client-test-support'),
+                project(':core/domain-test-support')
+}

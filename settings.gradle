@@ -1,0 +1,31 @@
+rootProject.name = 'queue-triage'
+
+include 'common/cxf',
+        'common/health',
+        'common/id',
+        'common/jackson',
+        'common/jgiven',
+        'common/ldap-test-support',
+        'common/matchers',
+        'common/swagger',
+
+        'core/activemq',
+        'core/client',
+        'core/client-test-support',
+        'core/component-test',
+        'core/dao',
+        'core/dao-mongo',
+        'core/dao-mongo-test-support',
+        'core/domain',
+        'core/domain-test-support',
+        'core/jms',
+        'core/message-classification',
+        'core/resend',
+        'core/search',
+        'core/server',
+        'core/service',
+
+        'web/component-test',
+        'web/mustache',
+        'web/server',
+        'web/spring-security'

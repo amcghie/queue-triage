@@ -1,0 +1,28 @@
+dependencies {
+    compile project(':common/cxf'),
+            project(':common/health'),
+            project(':common/id'),
+            project(':common/jackson'),
+            project(':core/client'),
+            project(':web/mustache'),
+            project(':web/spring-security'),
+            "ch.qos.logback:logback-classic:$logbackVersion",
+            "ch.qos.logback:logback-core:$logbackVersion",
+            "org.apache.cxf:cxf-rt-frontend-jaxrs:$apacheCxfVersion",
+            "org.apache.cxf:cxf-rt-rs-client:$apacheCxfVersion",
+            "org.eclipse.jetty:jetty-server:$jettyVersion",
+            "org.eclipse.jetty.websocket:javax-websocket-server-impl:$jettyVersion",
+            "org.hibernate:hibernate-validator:$hibernateValidatorVersion",
+            "org.slf4j:jcl-over-slf4j:$slf4jVersion",
+            "org.slf4j:jul-to-slf4j:$slf4jVersion",
+            "org.slf4j:log4j-over-slf4j:$slf4jVersion",
+            "org.slf4j:slf4j-api:$slf4jVersion",
+            "org.springframework:spring-web:$springVersion",
+            "org.springframework.boot:spring-boot:$springBootVersion",
+            "org.springframework.boot:spring-boot-autoconfigure:$springBootVersion",
+            "org.springframework.security:spring-security-ldap:$springSecurityVersion",
+            "org.yaml:snakeyaml:1.17"
+
+    testCompile project(':core/client-test-support'),
+                "org.valid4j:json-path-matchers:1.1"
+}

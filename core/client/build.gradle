@@ -1,0 +1,12 @@
+dependencies {
+    compile project(':common/id')
+    compile "org.apache.commons:commons-lang3:3.5",
+            "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion",
+            "javax.validation:validation-api:$javaxValidationVersion",
+            "javax.ws.rs:javax.ws.rs-api:$javaxWsRsApiVersion",
+            "io.swagger:swagger-annotations:$swaggerVersion"
+
+    testCompile project(':core/client-test-support')
+    testCompile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+                "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion"
+}

@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':common/id'),
+            project(':core/client'),
+            project(':core/domain')
+
+    // core-search-mongo
+    compile project(':common/jackson'),
+            project(':core/dao'),
+            project(':core/dao-mongo')
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.mongodb:mongodb-driver:3.4.2",
+            "org.slf4j:slf4j-api:$slf4jVersion"
+
+    // core-search-mongo-spring
+    compile "org.springframework.boot:spring-boot:$springBootVersion",
+            "org.springframework:spring-context:$springVersion"
+
+    testCompile project(':core/dao-mongo-test-support')
+}

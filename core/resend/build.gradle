@@ -1,0 +1,20 @@
+dependencies {
+    compile project(':common/id'),
+            project(':core/client'),
+            project(':core/domain'),
+            project(':core/jms'),
+            project(':core/search'),
+            project(':core/service'),
+            "javax.ws.rs:javax.ws.rs-api:$javaxWsRsApiVersion",
+            "org.slf4j:slf4j-api:$slf4jVersion"
+
+    testCompile project(':core/client-test-support')
+
+    // resend-spring
+    compile project(':common/cxf'),
+            project(':core/activemq')
+
+    testCompile "org.yaml:snakeyaml:1.17"
+
+
+}

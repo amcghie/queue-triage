@@ -1,0 +1,6 @@
+dependencies {
+    compile project(':common/cxf'),
+            "org.apache.cxf:cxf-core:$apacheCxfVersion",
+            "org.apache.cxf:cxf-rt-rs-service-description-swagger:$apacheCxfVersion",
+            "org.springframework:spring-context:$springVersion"
+}
