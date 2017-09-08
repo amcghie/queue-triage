@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':common/cxf'),
+    compile project(':common/cxf-client'),
             project(':common/id')
 
     compile "javax.ws.rs:javax.ws.rs-api:$javaxWsRsApiVersion",

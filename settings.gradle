@@ -1,6 +1,7 @@
 rootProject.name = 'queue-triage'
 
 include 'common/cxf',
+        'common/cxf-client',
         'common/health',
         'common/id',
         'common/jackson',
@@ -15,6 +16,7 @@ include 'common/cxf',
         'core/component-test',
         'core/dao',
         'core/dao-mongo',
+        'core/dao-mongo-spring',
         'core/dao-mongo-test-support',
         'core/domain',
         'core/domain-test-support',

@@ -1,3 +1,5 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile project(':common/jgiven'),
             project(':common/ldap-test-support'),
@@ -11,11 +13,11 @@ dependencies {
             "org.mockito:mockito-core:$mockitoVersion",
             "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion",
             "org.seleniumhq.selenium:selenium-java:$seleniumVersion",
-            "org.springframework:spring-beans:$springVersion",
-            "org.springframework:spring-web:$springVersion"
+            "org.springframework:spring-beans",
+            "org.springframework:spring-web"
 
-    testCompile "org.springframework:spring-test:$springVersion",
-                "org.springframework.boot:spring-boot:$springBootVersion",
-                "org.springframework.boot:spring-boot-test:$springBootVersion"
+    testCompile "org.springframework:spring-test",
+                "org.springframework.boot:spring-boot",
+                "org.springframework.boot:spring-boot-test"
 
 }

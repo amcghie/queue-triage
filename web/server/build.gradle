@@ -1,3 +1,5 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile project(':common/cxf'),
             project(':common/health'),
@@ -17,9 +19,9 @@ dependencies {
             "org.slf4j:jul-to-slf4j:$slf4jVersion",
             "org.slf4j:log4j-over-slf4j:$slf4jVersion",
             "org.slf4j:slf4j-api:$slf4jVersion",
-            "org.springframework:spring-web:$springVersion",
-            "org.springframework.boot:spring-boot:$springBootVersion",
-            "org.springframework.boot:spring-boot-autoconfigure:$springBootVersion",
+            "org.springframework:spring-web",
+            "org.springframework.boot:spring-boot",
+            "org.springframework.boot:spring-boot-autoconfigure",
             "org.springframework.security:spring-security-ldap:$springSecurityVersion",
             "org.yaml:snakeyaml:$snakeYamlVersion"
 

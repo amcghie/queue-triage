@@ -5,12 +5,7 @@ dependencies {
             project(':core/domain')
 
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
-            "org.mongodb:mongodb-driver:3.4.2",
-            "org.springframework.boot:spring-boot:$springBootVersion",
-            "org.springframework:spring-context:$springVersion"
+            "org.mongodb:mongodb-driver:$mongoDriverVersion"
 
-    testCompile project(':core/dao-mongo-test-support'),
-                project(':core/domain-test-support'),
-                "org.hibernate:hibernate-validator:5.4.1.Final",
-                "org.yaml:snakeyaml:$snakeYamlVersion"
+    testCompile project(':core/dao-mongo-test-support')
 }

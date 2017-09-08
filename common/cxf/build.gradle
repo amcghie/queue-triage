@@ -1,8 +1,15 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
 
-    compile "org.apache.cxf:cxf-core:$apacheCxfVersion",
+    compile project(":common/cxf-client"),
+            "org.apache.cxf:cxf-core:$apacheCxfVersion",
             "org.apache.cxf:cxf-rt-frontend-jaxrs:$apacheCxfVersion",
             "org.apache.cxf:cxf-rt-transports-http-jetty:$apacheCxfVersion",
-            "org.springframework.boot:spring-boot:$springBootVersion"
+            "org.springframework.boot:spring-boot"
 
+}
+
+bootRepackage {
+    enabled = false
 }

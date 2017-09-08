@@ -1,10 +1,12 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile "javax.servlet:javax.servlet-api:3.1.0",
             "com.unboundid:unboundid-ldapsdk:4.0.0",
-            "org.springframework:spring-web:$springVersion",
-            "org.springframework.security:spring-security-config:$springSecurityVersion",
-            "org.springframework.security:spring-security-core:$springSecurityVersion",
-            "org.springframework.security:spring-security-ldap:$springSecurityVersion",
-            "org.springframework.security:spring-security-web:$springSecurityVersion"
+            "org.springframework:spring-web",
+            "org.springframework.security:spring-security-config",
+            "org.springframework.security:spring-security-core",
+            "org.springframework.security:spring-security-ldap",
+            "org.springframework.security:spring-security-web"
 
 }

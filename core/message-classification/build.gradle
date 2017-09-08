@@ -1,3 +1,5 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile project(':common/id'),
             project(':core/domain'),
@@ -9,10 +11,14 @@ dependencies {
     // message-classification-server
     compile project(':common/cxf'),
             project(':core/search'),
-            "org.springframework:spring-beans:$springVersion",
-            "org.springframework:spring-context:$springVersion"
+            "org.springframework:spring-beans",
+            "org.springframework:spring-context"
 
     testCompile project(':common/jackson'),
                 project(':common/matchers')
 
+}
+
+bootRepackage {
+    enabled = false
 }

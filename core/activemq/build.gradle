@@ -1,19 +1,24 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile project(':core/domain'),
             project(':core/jms'),
             project(':core/service'),
             "org.apache.activemq:activemq-client:5.14.5",
             "org.slf4j:slf4j-api:$slf4jVersion",
-            "org.springframework:spring-beans:$springVersion",
-            "org.springframework:spring-context:$springVersion",
-            "org.springframework:spring-core:$springVersion",
-            "org.springframework:spring-jms:$springVersion",
-            "org.springframework.boot:spring-boot:$springBootVersion"
+            "org.springframework:spring-beans",
+            "org.springframework:spring-context",
+            "org.springframework:spring-core",
+            "org.springframework:spring-jms",
+            "org.springframework.boot:spring-boot"
 
     testCompile project(':core/domain-test-support'),
-                "org.springframework:spring-test:$springVersion",
-                "org.springframework:spring-tx:$springVersion",
+                "org.springframework:spring-test",
+                "org.springframework:spring-tx",
+                "commons-logging:commons-logging",
                 "org.yaml:snakeyaml:$snakeYamlVersion"
+}
 
-
+bootRepackage {
+    enabled = false
 }

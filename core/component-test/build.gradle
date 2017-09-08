@@ -1,3 +1,5 @@
+apply plugin: 'org.springframework.boot'
+
 dependencies {
     compile project(':common/jgiven'),
             project(':core/client-test-support'),
@@ -5,11 +7,15 @@ dependencies {
             project(':core/server'),
             "com.tngtech.jgiven:jgiven-spring:$jgivenVersion",
             "org.awaitility:awaitility:3.0.0",
-            "org.springframework:spring-beans:$springVersion",
-            "org.springframework:spring-web:$springVersion"
+            "org.springframework:spring-beans",
+            "org.springframework:spring-web"
 
-    testCompile "org.springframework:spring-test:$springVersion",
-                "org.springframework.boot:spring-boot:$springBootVersion",
-                "org.springframework.boot:spring-boot-test:$springBootVersion"
+    testCompile "org.springframework:spring-test",
+                "org.springframework.boot:spring-boot",
+                "org.springframework.boot:spring-boot-test"
 
+}
+
+bootRepackage {
+    enabled = false
 }

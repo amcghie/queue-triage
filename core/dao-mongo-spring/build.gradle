@@ -1,0 +1,14 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile project(':common/id'),
+            project(':common/jackson'),
+            project(':core/dao'),
+            project(':core/dao-mongo'),
+            project(':core/domain')
+
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.mongodb:mongodb-driver:$mongoDriverVersion",
+            "org.springframework.boot:spring-boot",
+            "org.springframework:spring-context"
+}
