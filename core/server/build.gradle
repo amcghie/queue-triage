@@ -10,6 +10,7 @@ dependencies {
             project(':core/client'),
             project(':core/dao'),
             project(':core/dao-mongo'),
+            project(':core/dao-mongo-spring'),
             project(':core/domain'),
             project(':core/jms'),
             project(':core/message-classification'),

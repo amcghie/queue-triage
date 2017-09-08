@@ -6,7 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
+import uk.gov.dwp.queue.triage.core.dao.mongo.configuration.MongoDaoProperties;
 import uk.gov.dwp.queue.triage.cxf.configuration.CxfBusConfiguration;
 import uk.gov.dwp.queue.triage.swagger.configuration.SwaggerConfiguration;
 
@@ -22,6 +24,9 @@ import uk.gov.dwp.queue.triage.swagger.configuration.SwaggerConfiguration;
                 SecurityAutoConfiguration.class,
         }
 )
+@EnableConfigurationProperties({
+        MongoDaoProperties.class
+})
 public class QueueTriageCoreApplication {
 
     public static void main(String[] args) {
