@@ -6,10 +6,21 @@
     <link rel="stylesheet" type="text/css" href="/static/css/queue-triage.css" />
     <script type="text/javascript" src="/static/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="/static/js/w2ui-1.5.rc1.js"></script>
+    <script type="text/javascript" src="/static/js/test-utils.js"></script>
 </head>
 <body>
 
-<div id="failed-message-list-grid" style="width: 100%; height: 250px;"></div>
+<div>
+    <div id="failed-message-list-grid" style="width: 100%; height: 400px;"></div>
+    <div id="failed-message-properties-popup" style="display: none; width: 600px; height: 400px; overflow: hidden">
+        <div rel="title">
+            Popup #1 Title
+        </div>
+        <div rel="body" style="padding: 10px; line-height: 150%">
+            <div id="failed-message-properties-popup-body"></div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     w2utils.settings['dataType'] = 'JSON';
@@ -40,6 +51,18 @@
                 { field: 'labels', caption: 'Labels', size: '20%', editable: { type: 'text' } },
                 { field: 'content', caption: 'Content', size: '80%', sortable: true, searchable: true }
             ],
+            onDblClick: function (event) {
+                w2ui['failedMessageProperties'].clear();
+                // Simulate the AJAX Request to get messageProperties based upon 'event.recid'
+                messageProperties = [
+                    { recid: 0, key: 'traceId', value: guid() },
+                    { recid: 1, key: 'Delivery Attempts', value: 3},
+                    { recid: 2, key: 'Persistence', value: true},
+                    { recid: 3, key: 'Priority', value: 0}
+                ];
+                w2ui['failedMessageProperties'].add(messageProperties);
+                $('failed-message-properties-popup').w2popup();
+            },
             onSelect: function(event) {
                 event.onComplete = function() {
                     var sel = this.getSelection();
@@ -72,6 +95,18 @@
                 },
                 { type: 'break' }
         );
+        $('#failed-message-properties-popup-body').w2grid({
+            name: 'failedMessageProperties',
+            header: 'Properties',
+            show: {
+                header: true,
+                columnHeaders: false
+            },
+            columns: [
+                { field: 'key', size: '100px' },
+                { field: 'value', size: '300px' }
+            ]
+        })
     });
 </script>
 </body>
