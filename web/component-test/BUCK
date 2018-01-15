@@ -18,6 +18,7 @@ java_library(
         '//lib/test:jgiven',
         '//lib/test:jgiven-spring',
         '//lib/test:mockito-core',
+        '//web/client:queue-triage-web-client',
     ],
     visibility = [
         "//web/component-test:test"
@@ -43,6 +44,8 @@ java_test(
         '//lib/test:common',
         '//lib/test:jgiven',
         '//lib/test:jgiven-spring',
+        '//web/client:queue-triage-web-client',
+        '//web/client-test-support:queue-triage-web-client-test-support',
         '//web/component-test:queue-triage-web-component-test',
         '//web/server:queue-triage-web-server',
     ],

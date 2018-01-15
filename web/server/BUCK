@@ -17,12 +17,6 @@ java_library(
     resources_root = "src/main/resources",
     exported_deps = [
         "//common/jackson:queue-triage-common-jackson-spring",
-        "//lib/spring:spring-boot-autoconfigure",
-        "//lib/spring:spring-boot-with-dependencies",
-        "//lib/spring:spring-web",
-        "//web/mustache:queue-triage-web-mustache-spring",
-        "//web/spring-security:queue-triage-web-spring-security",
-        "//web/spring-security:queue-triage-web-spring-security-ldap",
         '//common/cxf-server:queue-triage-common-cxf-server',
         '//common/health:queue-triage-health',
         '//common/id:queue-triage-common-id',
@@ -40,6 +34,13 @@ java_library(
         '//lib/slf4j:jcl-over-slf4j',
         '//lib/slf4j:jul-to-slf4j',
         '//lib/slf4j:log4j-over-slf4j',
+        "//lib/spring:spring-boot-autoconfigure",
+        "//lib/spring:spring-boot-with-dependencies",
+        "//lib/spring:spring-web",
+        '//web/client:queue-triage-web-client',
+        "//web/mustache:queue-triage-web-mustache-spring",
+        "//web/spring-security:queue-triage-web-spring-security",
+        "//web/spring-security:queue-triage-web-spring-security-ldap",
     ],
     visibility = [
         "//web/component-test:test",
@@ -59,6 +60,8 @@ java_test(
         "//lib/spring:spring-security-core",
         "//lib/spring:spring-security-web",
         "//lib/test:common",
+        '//web/client:queue-triage-web-client',
+        '//web/client-test-support:queue-triage-web-client-test-support',
         "//web/mustache:queue-triage-web-mustache-spring",
     ]
 )

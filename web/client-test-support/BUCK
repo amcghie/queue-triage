@@ -1,0 +1,14 @@
+java_library(
+    name = 'queue-triage-web-client-test-support',
+    srcs = glob(['src/main/java/**/*.java']),
+    deps = [
+        '//common/id:queue-triage-common-id',
+        '//web/client:queue-triage-web-client',
+        '//lib/test:hamcrest-core',
+        '//lib/test:hamcrest-library',
+    ],
+    visibility = [
+        '//web/component-test/...',
+        '//web/server:test',
+    ],
+)

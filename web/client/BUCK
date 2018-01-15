@@ -1,0 +1,31 @@
+java_library(
+    name = "queue-triage-web-client",
+    srcs = glob(["src/main/java/**/*.java"]),
+    deps =[
+        '//common/id:queue-triage-common-id',
+        '//lib:commons-lang3',
+        '//lib/jackson:jackson-annotations',
+        '//lib/javax:javax-validation-api',
+        '//lib/javax:javax-ws-rs-api',
+        '//lib/swagger:swagger-annotations',
+    ],
+    visibility = [
+        '//web/client-test-support:queue-triage-web-client-test-support',
+        "//web/component-test:queue-triage-web-component-test",
+        "//web/component-test:test",
+        "//web/server:queue-triage-web-server",
+        '//web/server:test',
+    ]
+)
+
+# java_test(
+#     name = "test",
+#     srcs = glob(["src/test/java/**/*.java"]),
+#     deps = [
+#         "//web/client:queue-triage-web-client",
+#         "//lib/jackson:jackson-core",
+#         "//lib/jackson:jackson-databind",
+#         "//lib/jackson:jackson-datatype-jdk8",
+#         "//lib/test:common",
+#     ]
+# )
