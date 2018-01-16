@@ -11,9 +11,9 @@ public class StatusHistoryListItem {
     @JsonProperty
     private final String effectiveDateTime;
 
-    public StatusHistoryListItem(String recid,
-                                 String status,
-                                 String effectiveDateTime) {
+    public StatusHistoryListItem(@JsonProperty("recid") String recid,
+                                 @JsonProperty("status") String status,
+                                 @JsonProperty("effectiveDateTime") String effectiveDateTime) {
         this.recid = recid;
         this.status = status;
         this.effectiveDateTime = effectiveDateTime;

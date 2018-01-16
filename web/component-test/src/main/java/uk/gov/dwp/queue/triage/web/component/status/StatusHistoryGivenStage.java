@@ -1,6 +1,5 @@
 package uk.gov.dwp.queue.triage.web.component.status;
 
-import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.Table;
 import com.tngtech.jgiven.integration.spring.JGivenStage;
 import org.springframework.beans.factory.annotation.Autowired;

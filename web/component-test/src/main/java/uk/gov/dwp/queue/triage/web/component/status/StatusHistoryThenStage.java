@@ -1,12 +1,9 @@
 package uk.gov.dwp.queue.triage.web.component.status;
 
-import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
 import com.tngtech.jgiven.integration.spring.JGivenStage;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.springframework.http.ResponseEntity;
-import uk.gov.dwp.queue.triage.core.client.status.StatusHistoryResponse;
 import uk.gov.dwp.queue.triage.id.FailedMessageId;
 import uk.gov.dwp.queue.triage.jgiven.ThenStage;
 import uk.gov.dwp.queue.triage.web.server.api.status.StatusHistoryListItem;
