@@ -9,7 +9,7 @@ import uk.gov.dwp.queue.triage.core.client.FailedMessageStatus;
 import uk.gov.dwp.queue.triage.id.FailedMessageId;
 
 import static uk.gov.dwp.queue.triage.core.client.CreateFailedMessageRequest.newCreateFailedMessageRequest;
-import static uk.gov.dwp.queue.triage.core.domain.StatusHistoryResponseMatcher.statusHistoryResponse;
+import static uk.gov.dwp.queue.triage.core.domain.status.StatusHistoryResponseMatcher.statusHistoryResponse;
 
 public class FailedMessageStatusHistoryComponentTest extends BaseCoreComponentTest<StatusHistoryStage> {
 

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import uk.gov.dwp.queue.triage.core.resource.status.FailedMessageStatusHistoryResource;
+import uk.gov.dwp.queue.triage.core.resource.status.StatusHistoryResponseAdapter;
 import uk.gov.dwp.queue.triage.cxf.CxfConfiguration;
 import uk.gov.dwp.queue.triage.cxf.ResourceRegistry;
 import uk.gov.dwp.queue.triage.core.dao.FailedMessageDao;
@@ -66,6 +67,6 @@ public class FailedMessageResourceConfiguration {
     @Bean
     public FailedMessageStatusHistoryResource failedMessageStatusHistoryResource(ResourceRegistry resourceRegistry,
                                                                                  FailedMessageDao failedMessageDao) {
-        return resourceRegistry.add(new FailedMessageStatusHistoryResource(failedMessageDao));
+        return resourceRegistry.add(new FailedMessageStatusHistoryResource(failedMessageDao, new StatusHistoryResponseAdapter()));
     }
 }

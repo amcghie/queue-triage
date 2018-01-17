@@ -1,4 +1,4 @@
-package uk.gov.dwp.queue.triage.core.domain;
+package uk.gov.dwp.queue.triage.core.domain.status;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;

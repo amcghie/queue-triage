@@ -1,36 +1,38 @@
 package uk.gov.dwp.queue.triage.core.resource.status;
 
-import uk.gov.dwp.queue.triage.core.client.FailedMessageStatus;
 import uk.gov.dwp.queue.triage.core.client.status.FailedMessageStatusHistoryClient;
+import uk.gov.dwp.queue.triage.core.client.status.FailedMessageStatusHistoryResponse;
 import uk.gov.dwp.queue.triage.core.client.status.StatusHistoryResponse;
 import uk.gov.dwp.queue.triage.core.dao.FailedMessageDao;
-import uk.gov.dwp.queue.triage.core.domain.StatusHistoryEvent;
 import uk.gov.dwp.queue.triage.id.FailedMessageId;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static uk.gov.dwp.queue.triage.core.domain.FailedMessageStatusAdapter.toFailedMessageStatus;
+import java.util.stream.Collectors;
 
 public class FailedMessageStatusHistoryResource implements FailedMessageStatusHistoryClient {
 
     private final FailedMessageDao failedMessageDao;
+    private final StatusHistoryResponseAdapter statusHistoryResponseAdapter;
 
-    public FailedMessageStatusHistoryResource(FailedMessageDao failedMessageDao) {
+    public FailedMessageStatusHistoryResource(FailedMessageDao failedMessageDao,
+                                              StatusHistoryResponseAdapter statusHistoryResponseAdapter) {
         this.failedMessageDao = failedMessageDao;
+        this.statusHistoryResponseAdapter = statusHistoryResponseAdapter;
     }
 
     @Override
     public List<StatusHistoryResponse> getStatusHistory(FailedMessageId failedMessageId) {
-        final List<StatusHistoryResponse> statusHistoryResponses = new ArrayList<>();
-        final List<StatusHistoryEvent> statusHistory = failedMessageDao.getStatusHistory(failedMessageId);
-        for (int i=0; i<statusHistory.size(); i++) {
-            final FailedMessageStatus failedMessageStatus = toFailedMessageStatus(statusHistory.get(i).getStatus());
-            if (i+1<statusHistory.size() && failedMessageStatus.equals(toFailedMessageStatus(statusHistory.get(i+1).getStatus()))) {
-                i++;
-            }
-            statusHistoryResponses.add(new StatusHistoryResponse(failedMessageStatus, statusHistory.get(i).getEffectiveDateTime()));
-        }
-        return statusHistoryResponses;
+        return statusHistoryResponseAdapter.toStatusHistoryResponses(
+                failedMessageDao.getStatusHistory(failedMessageId)
+        );
+    }
+
+    @Override
+    public List<FailedMessageStatusHistoryResponse> getStatusHistory(List<FailedMessageId> failedMessageIds) {
+        // We may want to introduce a "bulk" call to the DAO.
+        return failedMessageIds
+                .stream()
+                .map(failedMessageId -> new FailedMessageStatusHistoryResponse(failedMessageId, getStatusHistory(failedMessageId)))
+                .collect(Collectors.toList());
     }
 }
