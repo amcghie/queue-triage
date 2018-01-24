@@ -9,6 +9,18 @@ env:
 
 addons:
   firefox: latest
+  artifacts:
+    debug: true
+    region: eu-west-1
+    paths:
+      - ./buck-out/gen/core/message-classification/__java_test_test-server_output__
+      - ./buck-out/gen/core/component-test/__java_test_test_output__
+      - ./buck-out/gen/web/component-test/__java_test_test_output__
+      - ./buck-out/gen/web/component-test/generate-jgiven-html-reports
+      - ./buck-out/gen/web/component-test/jgiven-reports
+      - ./buck-out/gen/web/component-test/selenide-output
+    working_dir: $TRAVIS_BUILD_NUMBER
+
 
 notifications:
   slack:
