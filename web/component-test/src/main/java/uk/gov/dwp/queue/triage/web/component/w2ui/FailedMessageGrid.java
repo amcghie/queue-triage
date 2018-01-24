@@ -8,8 +8,9 @@ public class FailedMessageGrid {
 
     public static void selectCheckboxForFailedMessage(FailedMessageId failedMessageId, boolean selected) {
         Selenide.$(By.id("grid_failedMessages_frec_" + failedMessageId))
-                .find("input[type='checkbox']")
-                .setSelected(selected);
+                .click();
+//                .find("input[type='checkbox']")
+//                .setSelected(selected);
     }
 
 }
