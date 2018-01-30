@@ -23,10 +23,9 @@ before_script:
   - docker ps
 
 script:
-#  - buck build //core/dao-mongo:create-users-and-roles
-#  - buck fetch //... > /dev/null
-#  - buck test //... > /dev/null
-  - buck test //web/component-test:test
+  - buck build //core/dao-mongo:create-users-and-roles
+  - buck fetch //... > /dev/null
+  - buck test //... > /dev/null
 services:
   - mongodb
   - docker
