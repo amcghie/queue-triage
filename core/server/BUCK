@@ -89,6 +89,52 @@ java_binary(
     ]
 )
 
+def rpm_build(
+    name,
+    package_name,
+    rpm_prefix,
+    version,
+    app_home,
+    lib  = []):
+    # For new players, this equates to:
+    # jars = []
+    # for entry in lib:
+    #     for jar in entry.split(":"):
+    #         jars.append(jar)
+    jars = [jar for entry in lib for jar in entry.split(":")]
+
+    cmd = [
+        'fpm',
+        '-s dir',
+        '-t rpm',
+        '-n %s' % package_name,
+        '-p $OUT',
+        '-v %s' % version,
+        '--rpm-os LINUX',
+        '--rpm-user root',
+        '--rpm-group root',
+        '--rpm-epoch 1',
+        '--architecture noarch',
+    ] + jars
+
+    genrule(
+        name = name
+        cmd = ' '.join(cmd)
+        out = '%s-%s.rpm' % (rpm_prefix, version)
+    )
+)
+
+rpm_build(
+    name = 'rpm-build',
+    package_name = 'dwpuc-queue-triage-core',
+    rpm_prefix = 'queue-triage-core',
+    version = '1.0.0',
+    app_home = '/srv/app',
+    lib = [
+        '$(classpath :server)',
+    ],
+)
+
 genrule(
     name = "start-script",
     cmd  = "echo 'java -cp $(classpath :queue-triage-core-server) uk.gov.dwp.queue.triage.core.QueueTriageCoreApplication' > $OUT && chmod u+x $OUT",
